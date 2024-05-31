@@ -36,6 +36,7 @@ int main()
 
     // Generates Shader objects
     Shader shaderProgram("default.vert", "default.frag", "default.geom");
+    Shader skyboxShader("skybox.vert", "skybox.frag", "default.geom");
 
     // Take care of all the light related things
     glm::vec4 lightColor = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
@@ -70,6 +71,12 @@ int main()
 
     // Load in models
     Model model((parentDir + modelPath).c_str());
+
+
+    std::string skyboxPath = "/Resources/models/skybox/scene.gltf";
+
+    // Load in models
+    Model skybox((parentDir + skyboxPath).c_str());
 
 
 
@@ -122,6 +129,8 @@ int main()
 
         // Draw the normal model
         model.Draw(shaderProgram, camera);
+        // Draw the skybox model
+        skybox.Draw(skyboxShader, camera);
 
         // Swap the back buffer with the front buffer
         glfwSwapBuffers(window);
