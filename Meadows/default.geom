@@ -1,9 +1,9 @@
-#version 330 core
-// for some reason it breaks when updated to 4.6
+#version 460 core
 
 layout (triangles) in;
 layout (triangle_strip, max_vertices = 3) out;
 
+out vec3 crntPos;
 out vec3 Normal;
 out vec3 color;
 out vec2 texCoord;
@@ -20,23 +20,17 @@ in DATA
 // Default main function
 void main()
 {
-    gl_Position = data_in[0].projection * gl_in[0].gl_Position;
-    Normal = data_in[0].Normal;
-    color = data_in[0].color;
-    texCoord = data_in[0].texCoord;
-    EmitVertex();
+    // I found multiple sources that stated that array indexes have to be constants, but for some reason this works perfectly fine on my computer... maybe this will break something in the future...
 
-    gl_Position = data_in[1].projection * gl_in[1].gl_Position;
-    Normal = data_in[1].Normal;
-    color = data_in[1].color;
-    texCoord = data_in[1].texCoord;
-    EmitVertex();
-
-    gl_Position = data_in[2].projection * gl_in[2].gl_Position;
-    Normal = data_in[2].Normal;
-    color = data_in[2].color;
-    texCoord = data_in[2].texCoord;
-    EmitVertex();
+    for(int i=0;i<=2;i++)
+    {
+        gl_Position = data_in[i].projection * gl_in[i].gl_Position;
+        crntPos = vec3(gl_in[i].gl_Position);
+        Normal = data_in[i].Normal;
+        color = data_in[i].color;
+        texCoord = data_in[i].texCoord;
+        EmitVertex();
+    }
 
     EndPrimitive();
 }
