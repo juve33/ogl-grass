@@ -36,4 +36,4 @@ private:
 	std::vector<GLuint> getIndices(json accessor);
 	std::vector<Texture> getTextures();
 };
-#endif#pragma once
+#endif
