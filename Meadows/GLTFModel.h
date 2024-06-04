@@ -1,13 +1,13 @@
 #ifndef GLTFMODEL_CLASS_H
 #define GLTFMODEL_CLASS_H
 
-#include"Model.h"
+#include"AbstractModel.h"
 #include<json/json.h>
 
 using json = nlohmann::json;
 
 
-class GLTFModel : public Model
+class GLTFModel : public AbstractModel
 {
 public:
 	// Loads in a model from a file and stores the information in 'data', 'JSON', and 'file'

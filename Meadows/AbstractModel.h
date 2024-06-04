@@ -1,14 +1,14 @@
-#ifndef MODEL_CLASS_H
-#define MODEL_CLASS_H
+#ifndef ABSTRACT_MODEL_CLASS_H
+#define ABSTRACT_MODEL_CLASS_H
 
 // do NOT include anything above Mesh.h bc it'll cause a linking error
 #include"Mesh.h"
 
 
-class Model
+class AbstractModel
 {
 public:
-	Model();
+	AbstractModel();
 
 	void Draw(Shader& shader, Camera& camera);
 

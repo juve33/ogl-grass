@@ -1,11 +1,11 @@
-#include"Model.h"
+#include"AbstractModel.h"
 
-Model::Model()
+AbstractModel::AbstractModel()
 {
 
 }
 
-void Model::Draw(Shader& shader, Camera& camera)
+void AbstractModel::Draw(Shader& shader, Camera& camera)
 {
 	// Go over all meshes and draw each one
 	for (unsigned int i = 0; i < meshes.size(); i++)
@@ -14,7 +14,7 @@ void Model::Draw(Shader& shader, Camera& camera)
 	}
 }
 
-std::vector<Vertex> Model::assembleVertices
+std::vector<Vertex> AbstractModel::assembleVertices
 (
 	std::vector<glm::vec3> positions,
 	std::vector<glm::vec3> normals,
@@ -38,7 +38,7 @@ std::vector<Vertex> Model::assembleVertices
 	return vertices;
 }
 
-std::vector<glm::vec2> Model::groupFloatsVec2(std::vector<float> floatVec)
+std::vector<glm::vec2> AbstractModel::groupFloatsVec2(std::vector<float> floatVec)
 {
 	std::vector<glm::vec2> vectors;
 	for (int i = 0; i < floatVec.size(); i)
@@ -47,7 +47,7 @@ std::vector<glm::vec2> Model::groupFloatsVec2(std::vector<float> floatVec)
 	}
 	return vectors;
 }
-std::vector<glm::vec3> Model::groupFloatsVec3(std::vector<float> floatVec)
+std::vector<glm::vec3> AbstractModel::groupFloatsVec3(std::vector<float> floatVec)
 {
 	std::vector<glm::vec3> vectors;
 	for (int i = 0; i < floatVec.size(); i)
@@ -56,7 +56,7 @@ std::vector<glm::vec3> Model::groupFloatsVec3(std::vector<float> floatVec)
 	}
 	return vectors;
 }
-std::vector<glm::vec4> Model::groupFloatsVec4(std::vector<float> floatVec)
+std::vector<glm::vec4> AbstractModel::groupFloatsVec4(std::vector<float> floatVec)
 {
 	std::vector<glm::vec4> vectors;
 	for (int i = 0; i < floatVec.size(); i)
