@@ -15,11 +15,13 @@ void VAO::LinkAttrib(Buffer<Vertex>& VBO, GLuint layout, GLuint numComponents, G
 	VBO.Unbind();
 }
 
-// Links a VBO Attribute to the VAO; DOES NEITHER BIND NOR UNBIND VAO
+// Links a VBO Attribute to the VAO
 void VAO::LinkAttrib(Buffer<glm::vec3>& VBO, GLuint layout, GLuint numComponents, GLenum type, GLsizeiptr stride, void* offset)
 {
+	VBO.Bind();
 	glVertexAttribPointer(layout, numComponents, type, GL_FALSE, stride, offset);
 	glEnableVertexAttribArray(layout);
+	VBO.Unbind();
 }
 
 // Binds the VAO

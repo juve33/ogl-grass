@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AbstractMesh.cpp" />
     <ClCompile Include="Buffer.cpp" />
     <ClCompile Include="Buffer.h" />
     <ClCompile Include="Camera.cpp" />
@@ -26,7 +27,7 @@
     <ClCompile Include="GLTFModel.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Mesh.cpp" />
-    <ClCompile Include="Model.cpp" />
+    <ClCompile Include="AbstractModel.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Skybox.cpp" />
     <ClCompile Include="stb.cpp" />
@@ -34,10 +35,11 @@
     <ClCompile Include="VAO.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AbstractMesh.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="GLTFModel.h" />
     <ClInclude Include="Mesh.h" />
-    <ClInclude Include="Model.h" />
+    <ClInclude Include="AbstractModel.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Skybox.h" />
     <ClInclude Include="Texture.h" />

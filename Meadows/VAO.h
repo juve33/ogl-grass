@@ -14,7 +14,7 @@ public:
 
 	// Links a VBO Attribute such as a position or color to the VAO
 	void LinkAttrib(Buffer<Vertex>& VBO, GLuint layout, GLuint numComponents, GLenum type, GLsizeiptr stride, void* offset);
-	// Links a VBO Attribute to the VAO; DOES NEITHER BIND NOR UNBIND VAO
+	// Links a VBO Attribute to the VAO
 	void LinkAttrib(Buffer<glm::vec3>& VBO, GLuint layout, GLuint numComponents, GLenum type, GLsizeiptr stride, void* offset);
 	// Binds the VAO
 	void Bind();
