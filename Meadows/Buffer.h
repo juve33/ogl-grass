@@ -3,7 +3,7 @@
 #define BUFFER_CLASS_H
 
 #include<glm/glm.hpp>
-#include<glad/glad.h>
+#include"AbstractObject.h"
 #include<vector>
 
 // Structure to standardize the vertices used in the meshes
@@ -18,13 +18,11 @@ struct Vertex
 
 
 template<typename T>
-class Buffer
+class Buffer : public AbstractObject
 {
 private:
 	GLenum target;
 public:
-	// Reference ID of the buffer object
-	GLuint ID;
 	// Constructor that generates a buffer object and links it to vertices
 	Buffer(GLenum target, std::vector<T>& bufferData);
 

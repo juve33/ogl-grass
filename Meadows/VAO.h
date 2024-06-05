@@ -1,14 +1,14 @@
 #ifndef VAO_CLASS_H
 #define VAO_CLASS_H
 
-#include<glad/glad.h>
+#include"AbstractObject.h"
 #include"Buffer.h"
 
-class VAO
+class VAO : public AbstractObject
 {
 public:
 	// ID reference for the Vertex Array Object
-	GLuint ID;
+	//GLuint ID;
 	// Constructor that generates a VAO ID
 	VAO();
 
