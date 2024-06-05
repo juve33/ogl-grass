@@ -1,3 +1,4 @@
+#pragma once
 #ifndef BUFFER_CLASS_H
 #define BUFFER_CLASS_H
 
@@ -34,5 +35,8 @@ public:
 	// Deletes the buffer
 	void Delete();
 };
+
+// I'm including Buffer.cpp here bc off the linking error you probably already read about in another header file
+#include"Buffer.cpp"
 
 #endif

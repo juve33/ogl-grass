@@ -1,4 +1,7 @@
 #include"Buffer.h"
+#pragma once
+#ifndef _BUFFER_CLASS_CPP_
+#define _BUFFER_CLASS_CPP_
 
 // Constructor that generates a buffer object and links it to vertices
 template<typename T>
@@ -30,3 +33,5 @@ void Buffer<T>::Delete()
 {
 	glDeleteBuffers(1, &ID);
 }
+
+#endif

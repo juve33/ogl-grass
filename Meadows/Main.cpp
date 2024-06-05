@@ -1,11 +1,14 @@
-// do NOT include anything above Model.h bc it'll cause a linking error (if it uses any buffer objects)
-#include"Model.h"
+#include"GLTFModel.h"
+#include"Skybox.h"
 #include<filesystem>
 namespace fs = std::filesystem;
 
-
 const unsigned int width = 800;
 const unsigned int height = 800;
+// Fullscreen
+//const unsigned int width = 1920;
+//const unsigned int height = 1017;
+
 
 
 int main()
@@ -36,16 +39,18 @@ int main()
 
     // Generates Shader objects
     Shader shaderProgram("default.vert", "default.frag", "default.geom");
+    Shader skyboxShader("skybox.vert", "skybox.frag");
 
     // Take care of all the light related things
     glm::vec4 lightColor = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
     glm::vec3 lightPos = glm::vec3(0.5f, 0.5f, 0.5f);
-    glm::mat4 lightModel = glm::mat4(1.0f);
-    lightModel = glm::translate(lightModel, lightPos);
 
     shaderProgram.Activate();
     glUniform4f(glGetUniformLocation(shaderProgram.ID, "lightColor"), lightColor.x, lightColor.y, lightColor.z, lightColor.w);
     glUniform3f(glGetUniformLocation(shaderProgram.ID, "lightDir"), glm::normalize(lightPos).x, glm::normalize(lightPos).y, glm::normalize(lightPos).z);
+
+    skyboxShader.Activate();
+    glUniform1i(glGetUniformLocation(skyboxShader.ID, "skybox"), 0);
 
 
 
@@ -69,7 +74,12 @@ int main()
     std::string modelPath = "/Resources/models/statue/scene.gltf";
 
     // Load in models
-    Model model((parentDir + modelPath).c_str());
+    GLTFModel model((parentDir + modelPath).c_str());
+
+    std::string skyboxPath = "/Resources/skybox";
+
+    // Create skybox
+    Skybox skybox((parentDir + skyboxPath).c_str());
 
 
 
@@ -123,6 +133,10 @@ int main()
         // Draw the normal model
         model.Draw(shaderProgram, camera);
 
+        skybox.Draw(skyboxShader, camera, width, height);
+
+
+
         // Swap the back buffer with the front buffer
         glfwSwapBuffers(window);
         // Take care of all GLFW events
@@ -133,6 +147,7 @@ int main()
 
     // Delete all the objects we've created
     shaderProgram.Delete();
+    skyboxShader.Delete();
     // Delete window before ending the program
     glfwDestroyWindow(window);
     // Terminate GLFW before ending the program
