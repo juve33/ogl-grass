@@ -1,10 +1,5 @@
 #include"AbstractModel.h"
 
-AbstractModel::AbstractModel()
-{
-
-}
-
 void AbstractModel::Draw(Shader& shader, Camera& camera)
 {
 	// Go over all meshes and draw each one

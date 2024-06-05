@@ -44,9 +44,11 @@ int main()
     // Take care of all the light related things
     glm::vec4 lightColor = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
     glm::vec3 lightPos = glm::vec3(0.5f, 0.5f, 0.5f);
+    glm::vec4 fogColor = glm::vec4(0.8f, 0.9f, 1.0f, 1.0f);
 
     shaderProgram.Activate();
     glUniform4f(glGetUniformLocation(shaderProgram.ID, "lightColor"), lightColor.x, lightColor.y, lightColor.z, lightColor.w);
+    glUniform4f(glGetUniformLocation(shaderProgram.ID, "fogColor"), fogColor.x, fogColor.y, fogColor.z, fogColor.w);
     glUniform3f(glGetUniformLocation(shaderProgram.ID, "lightDir"), glm::normalize(lightPos).x, glm::normalize(lightPos).y, glm::normalize(lightPos).z);
 
     skyboxShader.Activate();

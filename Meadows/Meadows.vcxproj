@@ -19,7 +19,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AbstractMesh.cpp" />
     <ClCompile Include="Buffer.cpp" />
     <ClCompile Include="Buffer.h" />
     <ClCompile Include="Camera.cpp" />
@@ -36,6 +35,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AbstractMesh.h" />
+    <ClInclude Include="AbstractObject.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="GLTFModel.h" />
     <ClInclude Include="Mesh.h" />

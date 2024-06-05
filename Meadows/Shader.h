@@ -1,7 +1,7 @@
 #ifndef SHADER_CLASS_H
 #define SHADER_CLASS_H
 
-#include<glad/glad.h>
+#include"AbstractObject.h"
 #include<string>
 #include<fstream>
 #include<sstream>
@@ -10,11 +10,9 @@
 
 std::string get_file_contents(const char* filename);
 
-class Shader
+class Shader : public AbstractObject
 {
 public:
-	// Reference ID of the Shader Program
-	GLuint ID;
 	// Constructor that build the Shader Program from 3 different shaders
 	Shader(const char* vertexFile, const char* fragmentFile, const char* geometryFile);
 	// Constructor that build the Shader Program from 2 different shaders

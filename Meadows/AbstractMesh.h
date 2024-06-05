@@ -10,9 +10,6 @@
 
 class AbstractMesh
 {
-public:
-	AbstractMesh();
-
 protected:
 	// Store VAO so it can be used in the Draw function
 	VAO VAO;

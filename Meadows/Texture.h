@@ -1,15 +1,14 @@
 #ifndef TEXTURE_CLASS_H
 #define TEXTURE_CLASS_H
 
-#include<glad/glad.h>
+#include"AbstractObject.h"
 #include<stb/stb_image.h>
 
 #include"Shader.h"
 
-class Texture
+class Texture : public AbstractObject
 {
 public:
-	GLuint ID;
 	const char* type;
 	GLuint unit;
 

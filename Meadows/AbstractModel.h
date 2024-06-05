@@ -8,8 +8,6 @@
 class AbstractModel
 {
 public:
-	AbstractModel();
-
 	void Draw(Shader& shader, Camera& camera);
 
 protected:
