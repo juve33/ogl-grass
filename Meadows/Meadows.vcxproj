@@ -19,7 +19,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AbstractMesh.cpp" />
     <ClCompile Include="Buffer.cpp" />
     <ClCompile Include="Buffer.h" />
     <ClCompile Include="Camera.cpp" />
