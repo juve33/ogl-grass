@@ -9,6 +9,7 @@ class AbstractModel
 {
 public:
 	void Draw(Shader& shader, Camera& camera);
+	void DrawInstanced(Shader& shader, Camera& camera, GLsizei numberOfInstances);
 
 protected:
 	// All the meshes and transformations

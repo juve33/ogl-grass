@@ -22,14 +22,13 @@ Mesh::Mesh(std::vector <Vertex>& vertices, std::vector <GLuint>& indices, std::v
 	EBO.Unbind();
 }
 
-
-void Mesh::Draw
+void Mesh::prepareDraw
 (
-	Shader& shader, 
+	Shader& shader,
 	Camera& camera,
 	glm::mat4 matrix,
-	glm::vec3 translation, 
-	glm::quat rotation, 
+	glm::vec3 translation,
+	glm::quat rotation,
 	glm::vec3 scale
 )
 {
@@ -75,7 +74,37 @@ void Mesh::Draw
 	glUniformMatrix4fv(glGetUniformLocation(shader.ID, "rotation"), 1, GL_FALSE, glm::value_ptr(rot));
 	glUniformMatrix4fv(glGetUniformLocation(shader.ID, "scale"), 1, GL_FALSE, glm::value_ptr(sca));
 	glUniformMatrix4fv(glGetUniformLocation(shader.ID, "model"), 1, GL_FALSE, glm::value_ptr(matrix));
+}
+
+void Mesh::Draw
+(
+	Shader& shader, 
+	Camera& camera,
+	glm::mat4 matrix,
+	glm::vec3 translation, 
+	glm::quat rotation, 
+	glm::vec3 scale
+)
+{
+	prepareDraw(shader, camera, matrix, translation, rotation, scale);
 
 	// Draw the actual mesh
 	glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
+}
+
+void Mesh::DrawInstanced
+(
+	Shader& shader,
+	Camera& camera,
+	GLsizei numberOfInstances,
+	glm::mat4 matrix,
+	glm::vec3 translation,
+	glm::quat rotation,
+	glm::vec3 scale
+)
+{
+	prepareDraw(shader, camera, matrix, translation, rotation, scale);
+
+	// Draw the actual mesh
+	glDrawElementsInstanced(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0, numberOfInstances);
 }

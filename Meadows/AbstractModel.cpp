@@ -9,6 +9,15 @@ void AbstractModel::Draw(Shader& shader, Camera& camera)
 	}
 }
 
+void AbstractModel::DrawInstanced(Shader& shader, Camera& camera, GLsizei numberOfInstances)
+{
+	// Go over all meshes and draw each one
+	for (unsigned int i = 0; i < meshes.size(); i++)
+	{
+		meshes[i].Mesh::DrawInstanced(shader, camera, numberOfInstances, matricesMeshes[i]);
+	}
+}
+
 std::vector<Vertex> AbstractModel::assembleVertices
 (
 	std::vector<glm::vec3> positions,

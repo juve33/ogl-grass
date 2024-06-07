@@ -133,7 +133,7 @@ int main()
 
 
         // Draw the normal model
-        model.Draw(shaderProgram, camera);
+        model.DrawInstanced(shaderProgram, camera, 25);
 
         skybox.Draw(skyboxShader, camera, width, height);
 
