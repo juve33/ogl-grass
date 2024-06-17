@@ -1,4 +1,4 @@
-#include"GLTFModel.h"
+#include"ChunkHandler.h"
 #include"Skybox.h"
 #include<filesystem>
 namespace fs = std::filesystem;
@@ -38,7 +38,7 @@ int main()
 
 
     // Generates Shader objects
-    Shader shaderProgram("default.vert", "default.frag", "default.geom");
+    Shader shaderProgram("grass.vert", "grass.frag", "grass.geom");
     Shader skyboxShader("skybox.vert", "skybox.frag");
 
     // Take care of all the light related things
@@ -51,6 +51,12 @@ int main()
     glUniform4f(glGetUniformLocation(shaderProgram.ID, "fogColor"), fogColor.x, fogColor.y, fogColor.z, fogColor.w);
     glUniform3f(glGetUniformLocation(shaderProgram.ID, "lightDir"), glm::normalize(lightPos).x, glm::normalize(lightPos).y, glm::normalize(lightPos).z);
 
+
+    unsigned int density = 50;
+
+    glUniform1f(glGetUniformLocation(shaderProgram.ID, "instanceDistance"), (1.0f / density));
+    glUniform1i(glGetUniformLocation(shaderProgram.ID, "chunkSize"), (unsigned int)(density * CHUNK_SIZE));
+
     skyboxShader.Activate();
     glUniform1i(glGetUniformLocation(skyboxShader.ID, "skybox"), 0);
 
@@ -59,24 +65,27 @@ int main()
     // Enables the Depth Buffer
     glEnable(GL_DEPTH_TEST);
     // Enables Cull Facing
-    glEnable(GL_CULL_FACE);
+    //glEnable(GL_CULL_FACE);
     // Keeps front faces
-    glCullFace(GL_FRONT);
+    //glCullFace(GL_FRONT);
     // Uses counter clock-wise standard
     glFrontFace(GL_CCW);
 
 
 
     // Creates camera object
-    Camera camera(width, height, glm::vec3(0.0f, 0.0f, 2.0f));
+    Camera camera(width, height, glm::vec3(0.0f, 2.0f, 0.0f));
 
 
 
     std::string parentDir = (fs::current_path().fs::path::parent_path()).string();
-    std::string modelPath = "/Resources/models/statue/scene.gltf";
+    std::string modelPath = "/Resources/models/grassblade/scene.gltf";
 
     // Load in models
     GLTFModel model((parentDir + modelPath).c_str());
+
+    ChunkHandler grass(1000, 1000, density);
+    grass.BindCamera(&camera);
 
     std::string skyboxPath = "/Resources/skybox";
 
@@ -104,6 +113,11 @@ int main()
         crntTime = glfwGetTime();
         timeDiff = crntTime - prevTime;
         counter++;
+        /*
+        if (std::trunc(prevTime) != std::trunc(crntTime))
+        {
+            std::cout << (camera.Position.x / 20.0f) << " " << (camera.Position.z / 20.0f) << "\n";
+        }*/
 
         if (timeDiff >= 1.0 / 30.0)
         {
@@ -133,8 +147,8 @@ int main()
 
 
         // Draw the normal model
-        model.DrawInstanced(shaderProgram, camera, 25);
-
+        grass.Render(shaderProgram, camera, &model, &model);
+        
         skybox.Draw(skyboxShader, camera, width, height);
 
 

@@ -22,6 +22,8 @@
     <ClCompile Include="Buffer.cpp" />
     <ClCompile Include="Buffer.h" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Chunk.cpp" />
+    <ClCompile Include="ChunkHandler.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="GLTFModel.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -37,6 +39,8 @@
     <ClInclude Include="AbstractMesh.h" />
     <ClInclude Include="AbstractObject.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Chunk.h" />
+    <ClInclude Include="ChunkHandler.h" />
     <ClInclude Include="GLTFModel.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="AbstractModel.h" />
@@ -49,6 +53,9 @@
     <None Include="default.frag" />
     <None Include="default.geom" />
     <None Include="default.vert" />
+    <None Include="grass.frag" />
+    <None Include="grass.geom" />
+    <None Include="grass.vert" />
     <None Include="skybox.frag" />
     <None Include="skybox.vert" />
   </ItemGroup>

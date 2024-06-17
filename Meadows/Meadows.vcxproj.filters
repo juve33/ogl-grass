@@ -62,9 +62,6 @@
     <ClCompile Include="Shader.cpp">
       <Filter>Source Files\Utility</Filter>
     </ClCompile>
-    <ClCompile Include="AbstractMesh.cpp">
-      <Filter>Source Files\Meshes</Filter>
-    </ClCompile>
     <ClCompile Include="Mesh.cpp">
       <Filter>Source Files\Meshes</Filter>
     </ClCompile>
@@ -76,6 +73,12 @@
     </ClCompile>
     <ClCompile Include="Skybox.cpp">
       <Filter>Source Files\Meshes</Filter>
+    </ClCompile>
+    <ClCompile Include="Chunk.cpp">
+      <Filter>Source Files\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="ChunkHandler.cpp">
+      <Filter>Source Files\Utility</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -106,6 +109,15 @@
     <ClInclude Include="GLTFModel.h">
       <Filter>Header Files\Models</Filter>
     </ClInclude>
+    <ClInclude Include="Chunk.h">
+      <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="AbstractObject.h">
+      <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="ChunkHandler.h">
+      <Filter>Header Files\Utility</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="default.frag">
@@ -121,6 +133,15 @@
       <Filter>Resource Files\Shaders</Filter>
     </None>
     <None Include="skybox.vert">
+      <Filter>Resource Files\Shaders</Filter>
+    </None>
+    <None Include="grass.frag">
+      <Filter>Resource Files\Shaders</Filter>
+    </None>
+    <None Include="grass.geom">
+      <Filter>Resource Files\Shaders</Filter>
+    </None>
+    <None Include="grass.vert">
       <Filter>Resource Files\Shaders</Filter>
     </None>
   </ItemGroup>

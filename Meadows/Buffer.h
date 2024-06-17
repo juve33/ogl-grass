@@ -2,6 +2,7 @@
 #ifndef BUFFER_CLASS_H
 #define BUFFER_CLASS_H
 
+#define GLM_FORCE_SWIZZLE
 #include<glm/glm.hpp>
 #include"AbstractObject.h"
 #include<vector>
