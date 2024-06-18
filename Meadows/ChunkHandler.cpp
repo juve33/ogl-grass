@@ -21,32 +21,35 @@ void ChunkHandler::BindCamera(Camera* camera)
 
 void ChunkHandler::Render(Shader& shader, Camera& camera, GLTFModel* LOD1, GLTFModel* LOD2)
 {
-    int m = (int)floor((position->x - startPosition.x) / (20.0f * CHUNK_SIZE));
-    int n = (int)floor((position->z - startPosition.y) / (20.0f * CHUNK_SIZE)) % y;
+    int m = (int)floor((position->x - startPosition.x) / CHUNK_SIZE);
+    int n = (int)floor((position->z - startPosition.y) / CHUNK_SIZE);
 
     int _m;
     int _n;
     int _index;
 
-    std::cout << "x: " << m << " y: " << n << " id: " << m * y + n << "\n";
-    if ((m < x + RENDER_DISTANCE) && (n < y + RENDER_DISTANCE))
+    if ((m < x + RENDER_DISTANCE) && (n < y + RENDER_DISTANCE) && (m >= -RENDER_DISTANCE) && (n >= -RENDER_DISTANCE))
     {
+        std::cout << "x: " << m << " y: " << n << " id: " << m * y + n << "\n";
         for (int i = -RENDER_DISTANCE; i <= RENDER_DISTANCE; i++)
         {
-            for (int j = -RENDER_DISTANCE; j <= RENDER_DISTANCE; j++)
+            _m = m + i;
+            if ((_m >= 0) && (_m < x))
             {
-                _m = m + i;
-                _n = n + j;
-                if ((_m >= 0) && (_n >= 0) && (_m < x) && (n < y))
+                for (int j = -RENDER_DISTANCE; j <= RENDER_DISTANCE; j++)
                 {
-                    _index = _m * y + _n;
-                    if (glm::distance((position->xz() / 20.0f), chunks[_index].GetCenter()) < LOD_DISTANCE)
+                    _n = n + j;
+                    if ((_n >= 0) && (_n < y))
                     {
-                        //chunks[_index].Render(shader, camera, LOD1);
-                    }
-                    else
-                    {
-                        chunks[_index].Render(shader, camera, LOD2);
+                        _index = _m * y + _n;
+                        if (glm::distance(position->xz(), chunks[_index].GetCenter()) < LOD_DISTANCE)
+                        {
+                            chunks[_index].Render(shader, camera, LOD1);
+                        }
+                        else
+                        {
+                            chunks[_index].Render(shader, camera, LOD2);
+                        }
                     }
                 }
             }

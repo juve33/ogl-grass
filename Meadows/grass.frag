@@ -44,14 +44,14 @@ vec4 direcLight()
 
 
 float near = 0.1f;
-float far = 100.0f;
+float far = 4.75f;
 
 float linearizeDepth(float depth)
 {
 	return (2.0 * near * far) / (far + near - (depth * 2.0 - 1.0) * (far - near));
 }
 
-float logisticDepth(float depth, float gradientLength = 65.0f, float offset = 30.0f)
+float logisticDepth(float depth, float gradientLength = 2.5f, float offset = 2.0f)
 {
 	float zVal = linearizeDepth(depth);
 	return (clamp(((zVal - offset) / gradientLength), 0.0f, 1.0f));

@@ -4,14 +4,6 @@
 #include"GLTFModel.h"
 
 
-// Chunk size in world space units
-#define CHUNK_SIZE 0.5f
-// LOD distance in world space units
-#define LOD_DISTANCE 1.0f
-// Render distance in chunks
-#define RENDER_DISTANCE 6
-
-
 class Chunk : public AbstractObject
 {
 private:

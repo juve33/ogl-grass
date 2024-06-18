@@ -74,7 +74,7 @@ int main()
 
 
     // Creates camera object
-    Camera camera(width, height, glm::vec3(0.0f, 2.0f, 0.0f));
+    Camera camera(width, height, glm::vec3(0.0f, 0.2f, 0.0f));
 
 
 
@@ -83,6 +83,11 @@ int main()
 
     // Load in models
     GLTFModel model((parentDir + modelPath).c_str());
+
+    std::string lowDetailModelPath = "/Resources/models/grassblade_low_detail/scene.gltf";
+
+    // Load in models
+    GLTFModel lowDetailModel((parentDir + lowDetailModelPath).c_str());
 
     ChunkHandler grass(1000, 1000, density);
     grass.BindCamera(&camera);
@@ -143,11 +148,11 @@ int main()
         // Handles camera inputs (delete this if you have disabled VSync)
         camera.Inputs(window);
         // Updates and exports the camera matrix to the Vertex Shader
-        camera.updateMatrix(45.0f, 0.1f, 100.0f);
+        camera.updateMatrix(45.0f, 0.1f, 4.75f);
 
 
         // Draw the normal model
-        grass.Render(shaderProgram, camera, &model, &model);
+        grass.Render(shaderProgram, camera, &model, &lowDetailModel);
         
         skybox.Draw(skyboxShader, camera, width, height);
 
