@@ -118,11 +118,6 @@ int main()
         crntTime = glfwGetTime();
         timeDiff = crntTime - prevTime;
         counter++;
-        /*
-        if (std::trunc(prevTime) != std::trunc(crntTime))
-        {
-            std::cout << (camera.Position.x / 20.0f) << " " << (camera.Position.z / 20.0f) << "\n";
-        }*/
 
         if (timeDiff >= 1.0 / 30.0)
         {
@@ -135,9 +130,6 @@ int main()
             // Resets times and counter
             prevTime = crntTime;
             counter = 0;
-
-            // Use this if you have disabled VSync
-            //camera.Inputs(window);
         }
 
         // Specify the color of the background

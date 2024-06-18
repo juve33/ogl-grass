@@ -30,7 +30,6 @@ void ChunkHandler::Render(Shader& shader, Camera& camera, GLTFModel* LOD1, GLTFM
 
     if ((m < x + RENDER_DISTANCE) && (n < y + RENDER_DISTANCE) && (m >= -RENDER_DISTANCE) && (n >= -RENDER_DISTANCE))
     {
-        std::cout << "x: " << m << " y: " << n << " id: " << m * y + n << "\n";
         for (int i = -RENDER_DISTANCE; i <= RENDER_DISTANCE; i++)
         {
             _m = m + i;
@@ -55,18 +54,4 @@ void ChunkHandler::Render(Shader& shader, Camera& camera, GLTFModel* LOD1, GLTFM
             }
         }
     }
-    
-    /*
-    for (Chunk chunk : chunks)
-    {
-        if (glm::distance((position->xz() / 20.0f), chunk.GetCenter()) < LOD_DISTANCE)
-        {
-            //chunk.Render(shader, camera, LOD1);
-        }
-        else
-        {
-            chunk.Render(shader, camera, LOD2);
-        }
-    }
-    */
 }

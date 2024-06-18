@@ -1,7 +1,7 @@
 // Chunk size in world space units
 #define CHUNK_SIZE 0.5f
 // LOD distance in world space units
-#define LOD_DISTANCE 1.25f
+#define LOD_DISTANCE 1.5f
 // Render distance in chunks
 #define RENDER_DISTANCE 10
 
