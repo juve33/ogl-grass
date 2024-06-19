@@ -19,7 +19,7 @@ int main()
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-    GLFWwindow* window = glfwCreateWindow(width, height, "Meadow", NULL, NULL);
+    GLFWwindow* window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Meadow", NULL, NULL);
     // Error check if the window fails to create
     if (window == NULL)
     {
@@ -33,7 +33,7 @@ int main()
     //Load GLAD so it configures OpenGL
     gladLoadGL();
     // Specify the viewport of OpenGL in the Window
-    glViewport(0, 0, width, height);
+    glViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 
 
 
@@ -74,7 +74,7 @@ int main()
 
 
     // Creates camera object
-    Camera camera(width, height, glm::vec3(0.0f, 0.2f, 0.0f));
+    Camera camera(SCREEN_WIDTH, SCREEN_HEIGHT, glm::vec3(0.0f, 0.2f, 0.0f));
 
 
 
@@ -139,13 +139,13 @@ int main()
         // Handles camera inputs
         camera.Inputs(window);
         // Updates and exports the camera matrix to the Vertex Shader
-        camera.updateMatrix(45.0f, 0.1f, 4.75f);
+        camera.updateMatrix(VIEW_ANGLE, MIN_VIEW_DISTANCE, MAX_VIEW_DISTANCE);
 
 
         // Draw the normal model
         grass.Render(shaderProgram, &camera, &model, &lowDetailModel);
         
-        skybox.Draw(skyboxShader, camera, width, height);
+        skybox.Draw(skyboxShader, camera);
 
 
 

@@ -10,7 +10,7 @@ public:
 	Skybox(std::string texturesDirectory);
 
 	// Draws the skybox
-	void Draw(Shader& shader, Camera& camera, int width, int height);
+	void Draw(Shader& shader, Camera& camera);
 
 private:
 	unsigned int cubemapTexture;

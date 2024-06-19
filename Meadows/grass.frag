@@ -43,7 +43,7 @@ vec4 direcLight()
 }
 
 
-float near = 0.1f;
+float near = 0.05f;
 float far = 4.75f;
 
 float linearizeDepth(float depth)

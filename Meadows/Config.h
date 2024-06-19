@@ -1,3 +1,20 @@
+/* SCREEN SETTINGS */
+
+#define SCREEN_WIDTH 800
+#define SCREEN_HEIGHT 800
+
+// Fullscreen:
+//#define SCREEN_WIDTH 1920
+//#define SCREEN_HEIGHT 1017
+
+#define MAX_VIEW_DISTANCE 4.75f
+#define MIN_VIEW_DISTANCE 0.05f
+#define VIEW_ANGLE 45.0f
+
+
+
+/* RENDER SETTINGS */
+
 // Chunk size in world space units
 #define CHUNK_SIZE 0.5f
 // LOD distance in world space units
