@@ -14,15 +14,10 @@ ChunkHandler::ChunkHandler(unsigned int x, unsigned int y, unsigned int density,
     ChunkHandler::startPosition = startPosition;
 }
 
-void ChunkHandler::BindCamera(Camera* camera)
+void ChunkHandler::Render(Shader& shader, Camera* camera, GLTFModel* LOD1, GLTFModel* LOD2)
 {
-	position = &camera->Position;
-}
-
-void ChunkHandler::Render(Shader& shader, Camera& camera, GLTFModel* LOD1, GLTFModel* LOD2)
-{
-    int m = (int)floor((position->x - startPosition.x) / CHUNK_SIZE);
-    int n = (int)floor((position->z - startPosition.y) / CHUNK_SIZE);
+    int m = (int)floor((camera->Position.x - startPosition.x) / CHUNK_SIZE);
+    int n = (int)floor((camera->Position.z - startPosition.y) / CHUNK_SIZE);
 
     int _m;
     int _n;
@@ -41,7 +36,7 @@ void ChunkHandler::Render(Shader& shader, Camera& camera, GLTFModel* LOD1, GLTFM
                     if ((_n >= 0) && (_n < y))
                     {
                         _index = _m * y + _n;
-                        if (glm::distance(position->xz(), chunks[_index].GetCenter()) < LOD_DISTANCE)
+                        if (glm::distance(camera->Position.xz(), chunks[_index].GetCenter()) < LOD_DISTANCE)
                         {
                             chunks[_index].Render(shader, camera, LOD1);
                         }

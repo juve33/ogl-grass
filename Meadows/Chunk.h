@@ -15,7 +15,7 @@ public:
 	// Constructor that generates a buffer object and links it to vertices
 	Chunk(unsigned int density, glm::vec2 position = glm::vec2(0.0f, 0.0f));
 
-	void Render(Shader& shader, Camera& camera, GLTFModel* model);
+	void Render(Shader& shader, Camera* camera, GLTFModel* model);
 
 	glm::vec2 GetCenter();
 };

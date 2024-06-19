@@ -8,7 +8,6 @@ class ChunkHandler : public AbstractObject
 {
 private:
 	std::vector<Chunk> chunks;
-	glm::vec3* position;
 	int x;
 	int y;
 	glm::vec2 startPosition;
@@ -19,7 +18,7 @@ public:
 
 	void BindCamera(Camera* camera);
 
-	void Render(Shader& shader, Camera& camera, GLTFModel* LOD1, GLTFModel* LOD2);
+	void Render(Shader& shader, Camera* camera, GLTFModel* LOD1, GLTFModel* LOD2);
 };
 
 #endif

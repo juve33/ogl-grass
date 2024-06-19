@@ -90,7 +90,6 @@ int main()
     GLTFModel lowDetailModel((parentDir + lowDetailModelPath).c_str());
 
     ChunkHandler grass(1000, 1000, density);
-    grass.BindCamera(&camera);
 
     std::string skyboxPath = "/Resources/skybox";
 
@@ -137,14 +136,14 @@ int main()
         // Clean the back buffer and depth buffer
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        // Handles camera inputs (delete this if you have disabled VSync)
+        // Handles camera inputs
         camera.Inputs(window);
         // Updates and exports the camera matrix to the Vertex Shader
         camera.updateMatrix(45.0f, 0.1f, 4.75f);
 
 
         // Draw the normal model
-        grass.Render(shaderProgram, camera, &model, &lowDetailModel);
+        grass.Render(shaderProgram, &camera, &model, &lowDetailModel);
         
         skybox.Draw(skyboxShader, camera, width, height);
 
