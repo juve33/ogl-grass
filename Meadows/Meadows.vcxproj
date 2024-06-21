@@ -26,6 +26,8 @@
     <ClCompile Include="ChunkHandler.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="GLTFModel.cpp" />
+    <ClCompile Include="Ground.cpp" />
+    <ClCompile Include="Atmosphere.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="AbstractModel.cpp" />
@@ -43,6 +45,8 @@
     <ClInclude Include="ChunkHandler.h" />
     <ClInclude Include="Config.h" />
     <ClInclude Include="GLTFModel.h" />
+    <ClInclude Include="Ground.h" />
+    <ClInclude Include="Atmosphere.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="AbstractModel.h" />
     <ClInclude Include="Shader.h" />
@@ -57,6 +61,8 @@
     <None Include="grass.frag" />
     <None Include="grass.geom" />
     <None Include="grass.vert" />
+    <None Include="ground.frag" />
+    <None Include="ground.vert" />
     <None Include="skybox.frag" />
     <None Include="skybox.vert" />
   </ItemGroup>

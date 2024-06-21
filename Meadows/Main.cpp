@@ -1,5 +1,7 @@
 #include"ChunkHandler.h"
+#include"Ground.h"
 #include"Skybox.h"
+#include"Atmosphere.h"
 #include<filesystem>
 namespace fs = std::filesystem;
 
@@ -38,24 +40,26 @@ int main()
 
 
     // Generates Shader objects
-    Shader shaderProgram("grass.vert", "grass.frag", "grass.geom");
+    Shader defaultShader("default.vert", "default.frag", "default.geom");
+    Shader grassShader("grass.vert", "grass.frag", "grass.geom");
+    Shader groundShader("ground.vert", "ground.frag");
     Shader skyboxShader("skybox.vert", "skybox.frag");
 
     // Take care of all the light related things
-    glm::vec4 lightColor = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
-    glm::vec3 lightPos = glm::vec3(0.5f, 0.5f, 0.5f);
-    glm::vec4 fogColor = glm::vec4(0.8f, 0.9f, 1.0f, 1.0f);
+    Atmosphere atmosphere;
+    atmosphere.bindShader(&defaultShader);
+    atmosphere.bindShader(&grassShader);
+    atmosphere.bindShader(&groundShader);
 
-    shaderProgram.Activate();
-    glUniform4f(glGetUniformLocation(shaderProgram.ID, "lightColor"), lightColor.x, lightColor.y, lightColor.z, lightColor.w);
-    glUniform4f(glGetUniformLocation(shaderProgram.ID, "fogColor"), fogColor.x, fogColor.y, fogColor.z, fogColor.w);
-    glUniform3f(glGetUniformLocation(shaderProgram.ID, "lightDir"), glm::normalize(lightPos).x, glm::normalize(lightPos).y, glm::normalize(lightPos).z);
+    atmosphere.set(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), glm::vec3(0.5f, 0.5f, 0.5f), glm::vec4(0.8f, 0.9f, 1.0f, 1.0f));
+    
 
+    unsigned int density = 100;
 
-    unsigned int density = 50;
+    grassShader.Activate();
+    glUniform1f(glGetUniformLocation(grassShader.ID, "instanceDistance"), (1.0f / density));
+    glUniform1i(glGetUniformLocation(grassShader.ID, "chunkSize"), (unsigned int)(density * CHUNK_SIZE));
 
-    glUniform1f(glGetUniformLocation(shaderProgram.ID, "instanceDistance"), (1.0f / density));
-    glUniform1i(glGetUniformLocation(shaderProgram.ID, "chunkSize"), (unsigned int)(density * CHUNK_SIZE));
 
     skyboxShader.Activate();
     glUniform1i(glGetUniformLocation(skyboxShader.ID, "skybox"), 0);
@@ -79,22 +83,18 @@ int main()
 
 
     std::string parentDir = (fs::current_path().fs::path::parent_path()).string();
-    std::string modelPath = "/Resources/models/grassblade/scene.gltf";
+
+    // For some weird reason it is extremely important that the skybox is created before any other texture is loaded, because otherwise the right side of it will be turned upside down
+    // Create skybox
+    Skybox skybox((parentDir + "/Resources/skybox").c_str());
 
     // Load in models
-    GLTFModel model((parentDir + modelPath).c_str());
+    GLTFModel model((parentDir + "/Resources/models/grassblade/scene.gltf").c_str());
+    GLTFModel lowDetailModel((parentDir + "/Resources/models/grassblade_low_detail/scene.gltf").c_str());
 
-    std::string lowDetailModelPath = "/Resources/models/grassblade_low_detail/scene.gltf";
-
-    // Load in models
-    GLTFModel lowDetailModel((parentDir + lowDetailModelPath).c_str());
+    Ground ground((parentDir + "/Resources/ground").c_str());
 
     ChunkHandler grass(1000, 1000, density);
-
-    std::string skyboxPath = "/Resources/skybox";
-
-    // Create skybox
-    Skybox skybox((parentDir + skyboxPath).c_str());
 
 
 
@@ -143,7 +143,9 @@ int main()
 
 
         // Draw the normal model
-        grass.Render(shaderProgram, &camera, &model, &lowDetailModel);
+        grass.Render(grassShader, &camera, &model, &lowDetailModel);
+
+        ground.Draw(groundShader, camera);
         
         skybox.Draw(skyboxShader, camera);
 
@@ -158,7 +160,9 @@ int main()
 
 
     // Delete all the objects we've created
-    shaderProgram.Delete();
+    defaultShader.Delete();
+    grassShader.Delete();
+    groundShader.Delete();
     skyboxShader.Delete();
     // Delete window before ending the program
     glfwDestroyWindow(window);

@@ -80,6 +80,12 @@
     <ClCompile Include="ChunkHandler.cpp">
       <Filter>Source Files\Utility</Filter>
     </ClCompile>
+    <ClCompile Include="Ground.cpp">
+      <Filter>Source Files\Meshes</Filter>
+    </ClCompile>
+    <ClCompile Include="Atmosphere.cpp">
+      <Filter>Source Files\Utility</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VAO.h">
@@ -121,6 +127,12 @@
     <ClInclude Include="Config.h">
       <Filter>Header Files\Utility</Filter>
     </ClInclude>
+    <ClInclude Include="Ground.h">
+      <Filter>Header Files\Meshes</Filter>
+    </ClInclude>
+    <ClInclude Include="Atmosphere.h">
+      <Filter>Header Files\Utility</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="default.frag">
@@ -145,6 +157,12 @@
       <Filter>Resource Files\Shaders</Filter>
     </None>
     <None Include="grass.vert">
+      <Filter>Resource Files\Shaders</Filter>
+    </None>
+    <None Include="ground.frag">
+      <Filter>Resource Files\Shaders</Filter>
+    </None>
+    <None Include="ground.vert">
       <Filter>Resource Files\Shaders</Filter>
     </None>
   </ItemGroup>
