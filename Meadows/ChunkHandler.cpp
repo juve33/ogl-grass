@@ -15,7 +15,7 @@ ChunkHandler::ChunkHandler(std::string groundTexDir, unsigned int x, unsigned in
     ChunkHandler::startPosition = startPosition;
 }
 
-void ChunkHandler::Render(Shader& shader, Shader& groundShader, Camera* camera, GLTFModel* LOD1, GLTFModel* LOD2)
+void ChunkHandler::Render(Shader& shader, Shader& groundShader, Camera* camera, AbstractModel* LOD1, AbstractModel* LOD2)
 {
     int m = (int)floor((camera->Position.x - startPosition.x) / CHUNK_SIZE);
     int n = (int)floor((camera->Position.z - startPosition.y) / CHUNK_SIZE);

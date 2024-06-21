@@ -19,7 +19,7 @@ public:
 
 	void BindCamera(Camera* camera);
 
-	void Render(Shader& shader, Shader& groundShader, Camera* camera, GLTFModel* LOD1, GLTFModel* LOD2);
+	void Render(Shader& shader, Shader& groundShader, Camera* camera, AbstractModel* LOD1, AbstractModel* LOD2);
 };
 
 #endif
