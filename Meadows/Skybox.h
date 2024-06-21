@@ -1,9 +1,9 @@
 #ifndef SKYBOX_CLASS_H
 #define SKYBOX_CLASS_H
 
-#include"AbstractMesh.h"
+#include"AbsolutelyAbstractMesh.h"
 
-class Skybox : protected AbstractMesh
+class Skybox : protected AbsolutelyAbstractMesh
 {
 public:
 	// Creates the skybox

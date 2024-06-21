@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AbstractMesh.cpp" />
     <ClCompile Include="Buffer.cpp" />
     <ClCompile Include="Buffer.h" />
     <ClCompile Include="Camera.cpp" />
@@ -38,6 +39,7 @@
     <ClCompile Include="VAO.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AbsolutelyAbstractMesh.h" />
     <ClInclude Include="AbstractMesh.h" />
     <ClInclude Include="AbstractObject.h" />
     <ClInclude Include="Camera.h" />
