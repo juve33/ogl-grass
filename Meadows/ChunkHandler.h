@@ -4,7 +4,7 @@
 #include"Chunk.h"
 
 
-class ChunkHandler : public AbstractObject
+class ChunkHandler
 {
 private:
 	std::vector<Chunk> chunks;

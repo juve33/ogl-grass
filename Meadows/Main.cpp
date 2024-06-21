@@ -1,15 +1,8 @@
 #include"ChunkHandler.h"
-#include"Ground.h"
 #include"Skybox.h"
 #include"Atmosphere.h"
 #include<filesystem>
 namespace fs = std::filesystem;
-
-const unsigned int width = 800;
-const unsigned int height = 800;
-// Fullscreen
-//const unsigned int width = 1920;
-//const unsigned int height = 1017;
 
 
 
