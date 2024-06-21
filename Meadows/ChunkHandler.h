@@ -11,14 +11,15 @@ private:
 	int x;
 	int y;
 	glm::vec2 startPosition;
+	Ground ground;
 
 public:
 	// Constructor that generates a buffer object and links it to vertices
-	ChunkHandler(unsigned int x, unsigned int y, unsigned int density, glm::vec2 startPosition = glm::vec2(0.0f, 0.0f));
+	ChunkHandler(std::string groundTexDir, unsigned int x, unsigned int y, unsigned int density, glm::vec2 startPosition = glm::vec2(0.0f, 0.0f));
 
 	void BindCamera(Camera* camera);
 
-	void Render(Shader& shader, Camera* camera, GLTFModel* LOD1, GLTFModel* LOD2);
+	void Render(Shader& shader, Shader& groundShader, Camera* camera, GLTFModel* LOD1, GLTFModel* LOD2);
 };
 
 #endif

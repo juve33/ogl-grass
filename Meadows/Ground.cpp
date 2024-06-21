@@ -1,5 +1,10 @@
 #include "Ground.h"
 
+Ground::Ground()
+{
+
+}
+
 Ground::Ground(std::string texturesDirectory)
 {
 	vertices =

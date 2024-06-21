@@ -54,7 +54,7 @@ int main()
     atmosphere.set(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), glm::vec3(0.5f, 0.5f, 0.5f), glm::vec4(0.8f, 0.9f, 1.0f, 1.0f));
     
 
-    unsigned int density = 100;
+    unsigned int density = 50;
 
     grassShader.Activate();
     glUniform1f(glGetUniformLocation(grassShader.ID, "instanceDistance"), (1.0f / density));
@@ -92,9 +92,7 @@ int main()
     GLTFModel model((parentDir + "/Resources/models/grassblade/scene.gltf").c_str());
     GLTFModel lowDetailModel((parentDir + "/Resources/models/grassblade_low_detail/scene.gltf").c_str());
 
-    Ground ground((parentDir + "/Resources/ground").c_str());
-
-    ChunkHandler grass(1000, 1000, density);
+    ChunkHandler grass((parentDir + "/Resources/ground").c_str(), 1000, 1000, density);
 
 
 
@@ -143,9 +141,7 @@ int main()
 
 
         // Draw the normal model
-        grass.Render(grassShader, &camera, &model, &lowDetailModel);
-
-        ground.Draw(groundShader, camera);
+        grass.Render(grassShader, groundShader, &camera, &model, &lowDetailModel);
         
         skybox.Draw(skyboxShader, camera);
 

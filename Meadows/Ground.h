@@ -11,6 +11,7 @@ public:
 	std::vector <Texture> textures;
 
 	// Initializes the mesh
+	Ground();
 	Ground(std::string texturesDirectory);
 
 	// Draws the mesh
