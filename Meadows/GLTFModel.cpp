@@ -1,5 +1,10 @@
 #include"GLTFModel.h"
 
+GLTFModel::GLTFModel()
+{
+
+}
+
 GLTFModel::GLTFModel(const char* file)
 {
 	// Make a JSON object

@@ -1,13 +1,8 @@
-#include"GLTFModel.h"
+#include"ChunkHandler.h"
 #include"Skybox.h"
+#include"Atmosphere.h"
 #include<filesystem>
 namespace fs = std::filesystem;
-
-const unsigned int width = 800;
-const unsigned int height = 800;
-// Fullscreen
-//const unsigned int width = 1920;
-//const unsigned int height = 1017;
 
 
 
@@ -19,7 +14,7 @@ int main()
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-    GLFWwindow* window = glfwCreateWindow(width, height, "Meadow", NULL, NULL);
+    GLFWwindow* window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Meadow", NULL, NULL);
     // Error check if the window fails to create
     if (window == NULL)
     {
@@ -33,23 +28,31 @@ int main()
     //Load GLAD so it configures OpenGL
     gladLoadGL();
     // Specify the viewport of OpenGL in the Window
-    glViewport(0, 0, width, height);
+    glViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 
 
 
     // Generates Shader objects
-    Shader shaderProgram("default.vert", "default.frag", "default.geom");
+    Shader defaultShader("default.vert", "default.frag", "default.geom");
+    Shader grassShader("grass.vert", "grass.frag", "grass.geom");
+    Shader groundShader("ground.vert", "ground.frag");
     Shader skyboxShader("skybox.vert", "skybox.frag");
 
     // Take care of all the light related things
-    glm::vec4 lightColor = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
-    glm::vec3 lightPos = glm::vec3(0.5f, 0.5f, 0.5f);
-    glm::vec4 fogColor = glm::vec4(0.8f, 0.9f, 1.0f, 1.0f);
+    Atmosphere atmosphere;
+    atmosphere.bindShader(&defaultShader);
+    atmosphere.bindShader(&grassShader);
+    atmosphere.bindShader(&groundShader);
 
-    shaderProgram.Activate();
-    glUniform4f(glGetUniformLocation(shaderProgram.ID, "lightColor"), lightColor.x, lightColor.y, lightColor.z, lightColor.w);
-    glUniform4f(glGetUniformLocation(shaderProgram.ID, "fogColor"), fogColor.x, fogColor.y, fogColor.z, fogColor.w);
-    glUniform3f(glGetUniformLocation(shaderProgram.ID, "lightDir"), glm::normalize(lightPos).x, glm::normalize(lightPos).y, glm::normalize(lightPos).z);
+    atmosphere.set(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), glm::vec3(0.5f, 0.5f, 0.5f), glm::vec4(0.8f, 0.9f, 1.0f, 1.0f));
+    
+
+    unsigned int density = 50;
+
+    grassShader.Activate();
+    glUniform1f(glGetUniformLocation(grassShader.ID, "instanceDistance"), (1.0f / density));
+    glUniform1i(glGetUniformLocation(grassShader.ID, "chunkSize"), (unsigned int)(density * CHUNK_SIZE));
+
 
     skyboxShader.Activate();
     glUniform1i(glGetUniformLocation(skyboxShader.ID, "skybox"), 0);
@@ -59,29 +62,30 @@ int main()
     // Enables the Depth Buffer
     glEnable(GL_DEPTH_TEST);
     // Enables Cull Facing
-    glEnable(GL_CULL_FACE);
+    //glEnable(GL_CULL_FACE);
     // Keeps front faces
-    glCullFace(GL_FRONT);
+    //glCullFace(GL_FRONT);
     // Uses counter clock-wise standard
     glFrontFace(GL_CCW);
 
 
 
     // Creates camera object
-    Camera camera(width, height, glm::vec3(0.0f, 0.0f, 2.0f));
+    Camera camera(SCREEN_WIDTH, SCREEN_HEIGHT, glm::vec3(0.0f, 0.2f, 0.0f));
 
 
 
     std::string parentDir = (fs::current_path().fs::path::parent_path()).string();
-    std::string modelPath = "/Resources/models/statue/scene.gltf";
+
+    // For some weird reason it is extremely important that the skybox is created before any other texture is loaded, because otherwise the right side of it will be turned upside down
+    // Create skybox
+    Skybox skybox((parentDir + "/Resources/skybox").c_str());
 
     // Load in models
-    GLTFModel model((parentDir + modelPath).c_str());
+    GLTFModel model((parentDir + "/Resources/models/grassblade/scene.gltf").c_str());
+    GLTFModel lowDetailModel((parentDir + "/Resources/models/grassblade_low_detail/scene.gltf").c_str());
 
-    std::string skyboxPath = "/Resources/skybox";
-
-    // Create skybox
-    Skybox skybox((parentDir + skyboxPath).c_str());
+    ChunkHandler grass((parentDir + "/Resources/ground").c_str(), 1000, 1000, density);
 
 
 
@@ -116,9 +120,6 @@ int main()
             // Resets times and counter
             prevTime = crntTime;
             counter = 0;
-
-            // Use this if you have disabled VSync
-            //camera.Inputs(window);
         }
 
         // Specify the color of the background
@@ -126,16 +127,16 @@ int main()
         // Clean the back buffer and depth buffer
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        // Handles camera inputs (delete this if you have disabled VSync)
+        // Handles camera inputs
         camera.Inputs(window);
         // Updates and exports the camera matrix to the Vertex Shader
-        camera.updateMatrix(45.0f, 0.1f, 100.0f);
+        camera.updateMatrix(VIEW_ANGLE, MIN_VIEW_DISTANCE, MAX_VIEW_DISTANCE);
 
 
         // Draw the normal model
-        model.Draw(shaderProgram, camera);
-
-        skybox.Draw(skyboxShader, camera, width, height);
+        grass.Render(grassShader, groundShader, &camera, &model, &lowDetailModel);
+        
+        skybox.Draw(skyboxShader, camera);
 
 
 
@@ -148,7 +149,9 @@ int main()
 
 
     // Delete all the objects we've created
-    shaderProgram.Delete();
+    defaultShader.Delete();
+    grassShader.Delete();
+    groundShader.Delete();
     skyboxShader.Delete();
     // Delete window before ending the program
     glfwDestroyWindow(window);

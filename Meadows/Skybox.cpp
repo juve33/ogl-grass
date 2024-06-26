@@ -104,7 +104,7 @@ Skybox::Skybox(std::string texturesDirectory)
     }
 }
 
-void Skybox::Draw(Shader& shader, Camera& camera, int width, int height)
+void Skybox::Draw(Shader& shader, Camera& camera)
 {
     // Since the cubemap will always have a depth of 1.0, we need that equal sign so it doesn't get discarded
     glDepthFunc(GL_LEQUAL);
@@ -115,7 +115,7 @@ void Skybox::Draw(Shader& shader, Camera& camera, int width, int height)
     // We make the mat4 into a mat3 and then a mat4 again in order to get rid of the last row and column
     // The last row and column affect the translation of the skybox (which we don't want to affect)
     view = glm::mat4(glm::mat3(glm::lookAt(camera.Position, camera.Position + camera.Orientation, camera.Up)));
-    projection = glm::perspective(glm::radians(45.0f), (float)width / height, 0.1f, 100.0f);
+    projection = glm::perspective(glm::radians(VIEW_ANGLE), (float)SCREEN_WIDTH / SCREEN_HEIGHT, MIN_VIEW_DISTANCE, MAX_VIEW_DISTANCE);
     glUniformMatrix4fv(glGetUniformLocation(shader.ID, "view"), 1, GL_FALSE, glm::value_ptr(view));
     glUniformMatrix4fv(glGetUniformLocation(shader.ID, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
 

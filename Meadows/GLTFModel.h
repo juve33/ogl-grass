@@ -10,6 +10,7 @@ using json = nlohmann::json;
 class GLTFModel : public AbstractModel
 {
 public:
+	GLTFModel();
 	// Loads in a model from a file and stores the information in 'data', 'JSON', and 'file'
 	GLTFModel(const char* file);
 

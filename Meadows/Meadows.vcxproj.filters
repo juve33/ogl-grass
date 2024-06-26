@@ -33,6 +33,12 @@
     <Filter Include="Source Files\Models">
       <UniqueIdentifier>{8b052c45-79b0-4787-baf7-d32352d4d0a7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\World">
+      <UniqueIdentifier>{2dc1c1ae-4554-4b35-81e5-b8bb3bae0468}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\World">
+      <UniqueIdentifier>{a6e98ba9-6e44-4e94-8935-1c1b4b6ca8f4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -62,9 +68,6 @@
     <ClCompile Include="Shader.cpp">
       <Filter>Source Files\Utility</Filter>
     </ClCompile>
-    <ClCompile Include="AbstractMesh.cpp">
-      <Filter>Source Files\Meshes</Filter>
-    </ClCompile>
     <ClCompile Include="Mesh.cpp">
       <Filter>Source Files\Meshes</Filter>
     </ClCompile>
@@ -76,6 +79,21 @@
     </ClCompile>
     <ClCompile Include="Skybox.cpp">
       <Filter>Source Files\Meshes</Filter>
+    </ClCompile>
+    <ClCompile Include="Ground.cpp">
+      <Filter>Source Files\Meshes</Filter>
+    </ClCompile>
+    <ClCompile Include="AbstractMesh.cpp">
+      <Filter>Source Files\Meshes</Filter>
+    </ClCompile>
+    <ClCompile Include="Atmosphere.cpp">
+      <Filter>Source Files\World</Filter>
+    </ClCompile>
+    <ClCompile Include="Chunk.cpp">
+      <Filter>Source Files\World</Filter>
+    </ClCompile>
+    <ClCompile Include="ChunkHandler.cpp">
+      <Filter>Source Files\World</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -106,6 +124,27 @@
     <ClInclude Include="GLTFModel.h">
       <Filter>Header Files\Models</Filter>
     </ClInclude>
+    <ClInclude Include="AbstractObject.h">
+      <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Config.h">
+      <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Ground.h">
+      <Filter>Header Files\Meshes</Filter>
+    </ClInclude>
+    <ClInclude Include="AbsolutelyAbstractMesh.h">
+      <Filter>Header Files\Meshes</Filter>
+    </ClInclude>
+    <ClInclude Include="Atmosphere.h">
+      <Filter>Header Files\World</Filter>
+    </ClInclude>
+    <ClInclude Include="ChunkHandler.h">
+      <Filter>Header Files\World</Filter>
+    </ClInclude>
+    <ClInclude Include="Chunk.h">
+      <Filter>Header Files\World</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="default.frag">
@@ -121,6 +160,21 @@
       <Filter>Resource Files\Shaders</Filter>
     </None>
     <None Include="skybox.vert">
+      <Filter>Resource Files\Shaders</Filter>
+    </None>
+    <None Include="grass.frag">
+      <Filter>Resource Files\Shaders</Filter>
+    </None>
+    <None Include="grass.geom">
+      <Filter>Resource Files\Shaders</Filter>
+    </None>
+    <None Include="grass.vert">
+      <Filter>Resource Files\Shaders</Filter>
+    </None>
+    <None Include="ground.frag">
+      <Filter>Resource Files\Shaders</Filter>
+    </None>
+    <None Include="ground.vert">
       <Filter>Resource Files\Shaders</Filter>
     </None>
   </ItemGroup>

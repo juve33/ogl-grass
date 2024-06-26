@@ -8,7 +8,8 @@
 class AbstractModel
 {
 public:
-	void Draw(Shader& shader, Camera& camera);
+	void Draw(Shader& shader, Camera& camera, glm::vec3 translation = glm::vec3(0.0f, 0.0f, 0.0f));
+	void DrawInstanced(Shader& shader, Camera& camera, GLsizei numberOfInstances, glm::vec3 translation = glm::vec3(0.0f, 0.0f, 0.0f));
 
 protected:
 	// All the meshes and transformations

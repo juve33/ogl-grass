@@ -1,11 +1,20 @@
 #include"AbstractModel.h"
 
-void AbstractModel::Draw(Shader& shader, Camera& camera)
+void AbstractModel::Draw(Shader& shader, Camera& camera, glm::vec3 translation)
 {
 	// Go over all meshes and draw each one
 	for (unsigned int i = 0; i < meshes.size(); i++)
 	{
-		meshes[i].Mesh::Draw(shader, camera, matricesMeshes[i]);
+		meshes[i].Mesh::Draw(shader, camera, matricesMeshes[i], translation);
+	}
+}
+
+void AbstractModel::DrawInstanced(Shader& shader, Camera& camera, GLsizei numberOfInstances, glm::vec3 translation)
+{
+	// Go over all meshes and draw each one
+	for (unsigned int i = 0; i < meshes.size(); i++)
+	{
+		meshes[i].Mesh::DrawInstanced(shader, camera, numberOfInstances, matricesMeshes[i], translation);
 	}
 }
 
