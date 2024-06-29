@@ -22,7 +22,7 @@
 // Render distance in chunks
 #define RENDER_DISTANCE 10
 // Density of the chunk model in instances per unit
-#define DENSITY 100
+#define DENSITY 150
 
 #define CAMERA_SPEED_SLOW 0.01f
 #define CAMERA_SPEED_FAST 0.04f
