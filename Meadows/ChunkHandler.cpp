@@ -25,7 +25,8 @@ ChunkHandler::ChunkHandler(std::string groundTexDir, unsigned int x, unsigned in
     for (int i = 0; i < (int)(density * density * CHUNK_SIZE * CHUNK_SIZE); i++)
     {
         grassDisplacement.push_back(glm::vec2((float)(std::rand() % 50) / 50.0f, (float)(std::rand() % 50) / 50.0f));
-        rotation = (float)(std::rand() % 100);
+        rotation = (float)(std::rand() % 360) * 3.14159f / 180.0f;
+        std::cout << rotation << "\n";
         grassRotation.push_back(glm::vec2(sin(rotation), cos(rotation)));
     }
     Buffer<glm::vec2> SSBO_displacement(GL_SHADER_STORAGE_BUFFER, grassDisplacement);
