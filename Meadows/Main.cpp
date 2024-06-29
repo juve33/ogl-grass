@@ -8,6 +8,8 @@ namespace fs = std::filesystem;
 
 int main()
 {
+    // Variables to create periodic event for FPS displaying
+    double prevTime = glfwGetTime();
     std::cout << "Mowing the lawn..." << "\n";
     glfwInit();
 
@@ -90,8 +92,14 @@ int main()
 
 
 
+    std::cout << "Green, green grass, blue, blue sky" << "\n" << "You better throw a party on the day that I die\n\n";
+    std::cout << "Time to load: " << std::to_string((unsigned int)((glfwGetTime() - prevTime) * 1000)) << "ms\n\n";
+    std::cout << "Using OpenGL " << glGetString(GL_VERSION);
+
+
+
     // Variables to create periodic event for FPS displaying
-    double prevTime = 0.0;
+    prevTime = 0.0;
     double crntTime = 0.0;
     double timeDiff;
     // Keeps track of the amount of frames in timeDiff
@@ -99,11 +107,6 @@ int main()
 
     // Use this to disable VSync (not advised)
     //glfwSwapInterval(0);
-
-
-
-    std::cout << "Green, green grass, blue, blue sky" << "\n" << "You better throw a party on the day that I die" << "\n\n";
-    std::cout << "Using OpenGL " << glGetString(GL_VERSION);
 
 
 
