@@ -3,6 +3,13 @@
 #ifndef _BUFFER_CLASS_CPP_
 #define _BUFFER_CLASS_CPP_
 
+// Constructor that does nothing (to avoid the error message when defining a buffer in a class)
+template<typename T>
+Buffer<T>::Buffer()
+{
+
+}
+
 // Constructor that generates a buffer object and links it to vertices
 template<typename T>
 Buffer<T>::Buffer(GLenum target, std::vector<T>& bufferData)
@@ -18,6 +25,13 @@ template<typename T>
 void Buffer<T>::Bind()
 {
 	glBindBuffer(target, ID);
+}
+
+// Sets the buffer binding
+template<typename T>
+void Buffer<T>::SetBinding(GLuint binding)
+{
+	glBindBufferBase(target, binding, ID);
 }
 
 // Unbinds the buffer

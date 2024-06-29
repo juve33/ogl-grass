@@ -26,9 +26,13 @@ private:
 public:
 	// Constructor that generates a buffer object and links it to vertices
 	Buffer(GLenum target, std::vector<T>& bufferData);
+	// Constructor that does nothing (to avoid the error message when defining a buffer in a class)
+	Buffer();
 
 	// Binds the buffer
 	void Bind();
+	// Sets the buffer binding
+	void SetBinding(GLuint binding);
 	// Unbinds the buffer
 	void Unbind();
 	// Deletes the buffer

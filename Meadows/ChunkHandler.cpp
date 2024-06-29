@@ -13,6 +13,20 @@ ChunkHandler::ChunkHandler(std::string groundTexDir, unsigned int x, unsigned in
     ChunkHandler::x = x;
     ChunkHandler::y = y;
     ChunkHandler::startPosition = startPosition;
+
+
+
+    // Set seed
+    std::srand(std::time(nullptr));
+
+    std::vector<glm::vec2> grassData;
+    for (int i = 0; i < (int)(density * density * CHUNK_SIZE * CHUNK_SIZE); i++)
+    {
+        grassData.push_back(glm::vec2((float)(std::rand() % 50) / 50.0f, (float)(std::rand() % 50) / 50.0f));
+    }
+    Buffer<glm::vec2> SSBO(GL_SHADER_STORAGE_BUFFER, grassData);
+    SSBO.SetBinding(0);
+    SSBO.Unbind();
 }
 
 void ChunkHandler::Render(Shader& shader, Shader& groundShader, Camera* camera, AbstractModel* LOD1, AbstractModel* LOD2)
