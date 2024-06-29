@@ -19,14 +19,21 @@ ChunkHandler::ChunkHandler(std::string groundTexDir, unsigned int x, unsigned in
     // Set seed
     std::srand(std::time(nullptr));
 
-    std::vector<glm::vec2> grassData;
+    std::vector<glm::vec2> grassDisplacement;
+    std::vector<glm::vec2> grassRotation;
+    float rotation;
     for (int i = 0; i < (int)(density * density * CHUNK_SIZE * CHUNK_SIZE); i++)
     {
-        grassData.push_back(glm::vec2((float)(std::rand() % 50) / 50.0f, (float)(std::rand() % 50) / 50.0f));
+        grassDisplacement.push_back(glm::vec2((float)(std::rand() % 50) / 50.0f, (float)(std::rand() % 50) / 50.0f));
+        rotation = (float)(std::rand() % 100);
+        grassRotation.push_back(glm::vec2(sin(rotation), cos(rotation)));
     }
-    Buffer<glm::vec2> SSBO(GL_SHADER_STORAGE_BUFFER, grassData);
-    SSBO.SetBinding(0);
-    SSBO.Unbind();
+    Buffer<glm::vec2> SSBO_displacement(GL_SHADER_STORAGE_BUFFER, grassDisplacement);
+    Buffer<glm::vec2> SSBO_rotation(GL_SHADER_STORAGE_BUFFER, grassRotation);
+    SSBO_displacement.SetBinding(0);
+    SSBO_rotation.SetBinding(1);
+    SSBO_displacement.Unbind();
+    SSBO_rotation.Unbind();
 }
 
 void ChunkHandler::Render(Shader& shader, Shader& groundShader, Camera* camera, AbstractModel* LOD1, AbstractModel* LOD2)
