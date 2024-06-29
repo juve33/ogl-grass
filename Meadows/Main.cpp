@@ -8,6 +8,7 @@ namespace fs = std::filesystem;
 
 int main()
 {
+    std::cout << "Mowing the lawn..." << "\n";
     glfwInit();
 
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
@@ -47,11 +48,9 @@ int main()
     atmosphere.set(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), glm::vec3(0.5f, 0.5f, 0.5f), glm::vec4(0.8f, 0.9f, 1.0f, 1.0f));
     
 
-    unsigned int density = 50;
-
     grassShader.Activate();
-    glUniform1f(glGetUniformLocation(grassShader.ID, "instanceDistance"), (1.0f / density));
-    glUniform1i(glGetUniformLocation(grassShader.ID, "chunkSize"), (unsigned int)(density * CHUNK_SIZE));
+    glUniform1f(glGetUniformLocation(grassShader.ID, "instanceDistance"), (1.0f / DENSITY));
+    glUniform1i(glGetUniformLocation(grassShader.ID, "chunkSize"), (unsigned int)(DENSITY * CHUNK_SIZE));
 
 
     skyboxShader.Activate();
@@ -75,6 +74,8 @@ int main()
 
 
 
+    std::cout << "Waiting for the grass to grow..." << "\n";
+
     std::string parentDir = (fs::current_path().fs::path::parent_path()).string();
 
     // For some weird reason it is extremely important that the skybox is created before any other texture is loaded, because otherwise the right side of it will be turned upside down
@@ -85,7 +86,7 @@ int main()
     GLTFModel model((parentDir + "/Resources/models/grassblade/scene.gltf").c_str());
     GLTFModel lowDetailModel((parentDir + "/Resources/models/grassblade_low_detail/scene.gltf").c_str());
 
-    ChunkHandler grass((parentDir + "/Resources/ground").c_str(), 1000, 1000, density);
+    ChunkHandler grass((parentDir + "/Resources/ground").c_str(), 1000, 1000, DENSITY);
 
 
 
@@ -98,6 +99,11 @@ int main()
 
     // Use this to disable VSync (not advised)
     //glfwSwapInterval(0);
+
+
+
+    std::cout << "Green, green grass, blue, blue sky" << "\n" << "You better throw a party on the day that I die" << "\n\n";
+    std::cout << "Using OpenGL " << glGetString(GL_VERSION);
 
 
 
