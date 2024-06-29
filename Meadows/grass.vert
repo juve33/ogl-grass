@@ -18,6 +18,14 @@ layout(binding = 1) buffer grass_data1
 {
     vec2 grassRotation[];
 };
+layout(binding = 2) buffer grass_data2
+{
+    float grassBending[];
+};
+layout(binding = 3) buffer grass_data3
+{
+    float grassHeight[];
+};
 
 
 out DATA
@@ -43,13 +51,23 @@ uniform float instanceDistance;
 uniform int chunkSize;
 
 
-mat4 rotationYAngle( in float angle )
+mat4 rotationXmat4( in float angle )
 {
 	return mat4(
-		cos(angle),	0, sin(angle), 0,
-		0, 1.0, 0, 0,
-		-sin(angle), 0, cos(angle),	0,
-		0, 0, 0, 1);
+		1.0, 0, 0, 0,
+		0, cos(angle), -sin(angle),	0,
+		0, sin(angle), cos(angle), 0,
+		0, 0, 0, 1
+	);
+}
+
+mat3 rotationXmat3( in float angle )
+{
+	return mat3(
+		1.0, 0, 0,
+		0, cos(angle), -sin(angle),
+		0, sin(angle), cos(angle)
+	);
 }
 
 mat4 rotationYmat4( in vec2 SinCos )
@@ -74,10 +92,11 @@ mat3 rotationYmat3( in vec2 SinCos )
 
 void main()
 {
+	float curveAmount = grassBending[gl_InstanceID] * aPos.y / (0.06 * grassHeight[gl_InstanceID]);
 	vec2 disp = vec2(instanceDistance * (mod(gl_InstanceID, chunkSize) + displacement[gl_InstanceID].x), instanceDistance * ((gl_InstanceID / chunkSize) + displacement[gl_InstanceID].y));
 	// gl_Position = model * translation * scale * (rotationY(0.25 * 3.1415926) * vec4(aPos.x + instanceDistance * (mod(gl_InstanceID, chunkSize) + displacement[gl_InstanceID].x), aPos.y, aPos.z + instanceDistance * ((gl_InstanceID / chunkSize) + displacement[gl_InstanceID].y), 1.0f));
-	gl_Position = model * translation * rotation * scale * (vec4(disp.x, 0.0, disp.y, 0.0) + (rotationYmat4(grassRotation[gl_InstanceID]) * vec4(aPos.x, aPos.y, aPos.z, 1.0f)));
-	data_out.Normal = rotationYmat3(grassRotation[gl_InstanceID]) * aNormal;
+	gl_Position = model * translation * rotation * scale * (vec4(disp.x, 0.0, disp.y, 0.0) + (rotationYmat4(grassRotation[gl_InstanceID]) * rotationXmat4(curveAmount) * vec4(aPos.x, aPos.y * grassHeight[gl_InstanceID], aPos.z, 1.0f)));
+	data_out.Normal = rotationYmat3(grassRotation[gl_InstanceID]) * rotationXmat3(curveAmount) * aNormal;
 	data_out.color = aColor;
 	data_out.texCoord = mat2(0.0, -1.0, 1.0, 0.0) * aTex;
 	data_out.projection = camMatrix;

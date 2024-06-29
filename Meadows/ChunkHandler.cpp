@@ -21,20 +21,33 @@ ChunkHandler::ChunkHandler(std::string groundTexDir, unsigned int x, unsigned in
 
     std::vector<glm::vec2> grassDisplacement;
     std::vector<glm::vec2> grassRotation;
+    std::vector<float> grassCurveValue;
+    std::vector<float> grassHeight;
     float rotation;
+
     for (int i = 0; i < (int)(density * density * CHUNK_SIZE * CHUNK_SIZE); i++)
     {
         grassDisplacement.push_back(glm::vec2((float)(std::rand() % 50) / 50.0f, (float)(std::rand() % 50) / 50.0f));
         rotation = (float)(std::rand() % 360) * 3.14159f / 180.0f;
-        std::cout << rotation << "\n";
         grassRotation.push_back(glm::vec2(sin(rotation), cos(rotation)));
+        grassCurveValue.push_back((float)(std::rand() % 100) / 150.0f);
+        grassHeight.push_back((float)(std::rand() % 50) / 100.0f + 0.75f);
     }
+
     Buffer<glm::vec2> SSBO_displacement(GL_SHADER_STORAGE_BUFFER, grassDisplacement);
     Buffer<glm::vec2> SSBO_rotation(GL_SHADER_STORAGE_BUFFER, grassRotation);
+    Buffer<float> SSBO_curve(GL_SHADER_STORAGE_BUFFER, grassCurveValue);
+    Buffer<float> SSBO_height(GL_SHADER_STORAGE_BUFFER, grassHeight);
+
     SSBO_displacement.SetBinding(0);
     SSBO_rotation.SetBinding(1);
+    SSBO_curve.SetBinding(2);
+    SSBO_height.SetBinding(3);
+
     SSBO_displacement.Unbind();
     SSBO_rotation.Unbind();
+    SSBO_curve.Unbind();
+    SSBO_height.Unbind();
 }
 
 void ChunkHandler::Render(Shader& shader, Shader& groundShader, Camera* camera, AbstractModel* LOD1, AbstractModel* LOD2)
