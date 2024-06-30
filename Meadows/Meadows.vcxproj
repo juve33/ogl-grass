@@ -63,6 +63,7 @@
     <None Include="grass.frag" />
     <None Include="grass.geom" />
     <None Include="grass.vert" />
+    <None Include="grassData.comp" />
     <None Include="ground.frag" />
     <None Include="ground.vert" />
     <None Include="skybox.frag" />

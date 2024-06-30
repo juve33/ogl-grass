@@ -177,5 +177,8 @@
     <None Include="ground.vert">
       <Filter>Resource Files\Shaders</Filter>
     </None>
+    <None Include="grassData.comp">
+      <Filter>Resource Files\Shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>

@@ -36,10 +36,27 @@ int main()
 
 
     // Generates Shader objects
-    Shader defaultShader("default.vert", "default.frag", "default.geom");
-    Shader grassShader("grass.vert", "grass.frag", "grass.geom");
-    Shader groundShader("ground.vert", "ground.frag");
-    Shader skyboxShader("skybox.vert", "skybox.frag");
+    Shader defaultShader;
+    defaultShader.Attach("default.vert", GL_VERTEX_SHADER);
+    defaultShader.Attach("default.geom", GL_GEOMETRY_SHADER);
+    defaultShader.Attach("default.frag", GL_FRAGMENT_SHADER);
+    defaultShader.Build();
+
+    Shader grassShader;
+    grassShader.Attach("grass.vert", GL_VERTEX_SHADER);
+    grassShader.Attach("grass.geom", GL_GEOMETRY_SHADER);
+    grassShader.Attach("grass.frag", GL_FRAGMENT_SHADER);
+    grassShader.Build();
+
+    Shader groundShader;
+    groundShader.Attach("ground.vert", GL_VERTEX_SHADER);
+    groundShader.Attach("ground.frag", GL_FRAGMENT_SHADER);
+    groundShader.Build();
+
+    Shader skyboxShader;
+    skyboxShader.Attach("skybox.vert", GL_VERTEX_SHADER);
+    skyboxShader.Attach("skybox.frag", GL_FRAGMENT_SHADER);
+    skyboxShader.Build();
 
     // Take care of all the light related things
     Atmosphere atmosphere;
