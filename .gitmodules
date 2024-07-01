@@ -1,0 +1,6 @@
+[submodule "Libraries/include/GLSL-Shader-Includes"]
+	path = Libraries/include/GLSL-Shader-Includes
+	url = https://github.com/tntmeijs/GLSL-Shader-Includes.git
+[submodule "Libraries/lib/lygia"]
+	path = Libraries/lib/lygia
+	url = https://github.com/patriciogonzalezvivo/lygia.git
