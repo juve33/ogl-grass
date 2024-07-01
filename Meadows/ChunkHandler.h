@@ -9,6 +9,7 @@ class ChunkHandler
 {
 private:
 	std::vector<Chunk> chunks;
+	unsigned int numberOfInstancesPerChunk;
 	int x;
 	int y;
 	glm::vec2 startPosition;
@@ -22,7 +23,7 @@ public:
 
 	void Render(Shader& shader, Shader& groundShader, Camera* camera, AbstractModel* LOD1, AbstractModel* LOD2);
 
-	void SetUpDataComputeShader(ComputeShader* computeShader);
+	unsigned int GetNumberOfInstancesPerChunk();
 };
 
 #endif

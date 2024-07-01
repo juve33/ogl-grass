@@ -26,7 +26,7 @@ layout(binding = 3) buffer grass_data3
 {
     float grassHeight[];
 };
-layout(std430, binding = 4) buffer grass_data4
+layout(binding = 4) buffer grass_data4
 {
     float test_float;
 };

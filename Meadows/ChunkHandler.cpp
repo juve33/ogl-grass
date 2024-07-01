@@ -14,6 +14,8 @@ ChunkHandler::ChunkHandler(std::string groundTexDir, unsigned int x, unsigned in
     ChunkHandler::y = y;
     ChunkHandler::startPosition = startPosition;
 
+    numberOfInstancesPerChunk = (unsigned int)(density * density * CHUNK_SIZE * CHUNK_SIZE);
+
 
 
     // Set seed
@@ -92,11 +94,7 @@ void ChunkHandler::Render(Shader& shader, Shader& groundShader, Camera* camera, 
     }
 }
 
-void ChunkHandler::SetUpDataComputeShader(ComputeShader* computeShader)
+unsigned int ChunkHandler::GetNumberOfInstancesPerChunk()
 {
-    computeShader->bufferIndex = 4;
-    computeShader->AddSSBO(sizeof(float), GL_DYNAMIC_COPY);
-
-    computeShader->Activate();
-    computeShader->Dispatch();
+    return numberOfInstancesPerChunk;
 }

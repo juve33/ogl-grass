@@ -115,7 +115,13 @@ int main()
     GLTFModel lowDetailModel((parentDir + "/Resources/models/grassblade_low_detail/scene.gltf").c_str());
 
     ChunkHandler grass((parentDir + "/Resources/ground").c_str(), 1000, 1000, DENSITY);
-    grass.SetUpDataComputeShader(&grassData);
+
+
+    grassData.bufferIndex = 4;
+    grassData.AddSSBO(sizeof(float), GL_DYNAMIC_COPY);
+
+    grassData.Activate();
+    grassData.Dispatch();
 
 
 
