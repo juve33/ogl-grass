@@ -20,6 +20,16 @@ Buffer<T>::Buffer(GLenum target, std::vector<T>& bufferData)
 	glBufferData(target, bufferData.size() * sizeof(T), bufferData.data(), GL_STATIC_DRAW);
 }
 
+// Constructor that generates a buffer object without any data
+template<typename T>
+Buffer<T>::Buffer(GLenum target, GLsizeiptr size, GLenum usage)
+{
+	Buffer::target = target;
+	glGenBuffers(1, &ID);
+	glBindBuffer(target, ID);
+	glBufferData(target, size, NULL, usage);
+}
+
 // Binds the buffer
 template<typename T>
 void Buffer<T>::Bind()

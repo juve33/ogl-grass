@@ -95,6 +95,9 @@
     <ClCompile Include="ChunkHandler.cpp">
       <Filter>Source Files\World</Filter>
     </ClCompile>
+    <ClCompile Include="ComputeShader.cpp">
+      <Filter>Source Files\Utility</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VAO.h">
@@ -144,6 +147,9 @@
     </ClInclude>
     <ClInclude Include="Chunk.h">
       <Filter>Header Files\World</Filter>
+    </ClInclude>
+    <ClInclude Include="ComputeShader.h">
+      <Filter>Header Files\Utility</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

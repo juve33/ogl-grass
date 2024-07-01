@@ -58,6 +58,10 @@ int main()
     skyboxShader.Attach("skybox.frag", GL_FRAGMENT_SHADER);
     skyboxShader.Build();
 
+    ComputeShader grassData;
+    grassData.Attach("grassData.comp", GL_COMPUTE_SHADER);
+    grassData.Build();
+
     // Take care of all the light related things
     Atmosphere atmosphere;
     atmosphere.bindShader(&defaultShader);
@@ -74,6 +78,11 @@ int main()
 
     skyboxShader.Activate();
     glUniform1i(glGetUniformLocation(skyboxShader.ID, "skybox"), 0);
+
+
+    //grassData.AddSSBO(sizeof(float), GL_DYNAMIC_COPY);
+    //grassData.Activate();
+    //grassData.Dispatch();
 
 
 
@@ -106,6 +115,7 @@ int main()
     GLTFModel lowDetailModel((parentDir + "/Resources/models/grassblade_low_detail/scene.gltf").c_str());
 
     ChunkHandler grass((parentDir + "/Resources/ground").c_str(), 1000, 1000, DENSITY);
+    grass.SetUpDataComputeShader(&grassData);
 
 
 
@@ -179,6 +189,7 @@ int main()
     grassShader.Delete();
     groundShader.Delete();
     skyboxShader.Delete();
+    grassData.Delete();
     // Delete window before ending the program
     glfwDestroyWindow(window);
     // Terminate GLFW before ending the program

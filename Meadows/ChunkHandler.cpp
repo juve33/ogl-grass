@@ -91,3 +91,12 @@ void ChunkHandler::Render(Shader& shader, Shader& groundShader, Camera* camera, 
         }
     }
 }
+
+void ChunkHandler::SetUpDataComputeShader(ComputeShader* computeShader)
+{
+    computeShader->bufferIndex = 4;
+    computeShader->AddSSBO(sizeof(float), GL_DYNAMIC_COPY);
+
+    computeShader->Activate();
+    computeShader->Dispatch();
+}

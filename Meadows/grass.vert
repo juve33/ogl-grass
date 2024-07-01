@@ -26,6 +26,10 @@ layout(binding = 3) buffer grass_data3
 {
     float grassHeight[];
 };
+layout(std430, binding = 4) buffer grass_data4
+{
+    float test_float;
+};
 
 
 out DATA
@@ -94,8 +98,7 @@ void main()
 {
 	float curveAmount = grassBending[gl_InstanceID] * aPos.y / (0.06 * grassHeight[gl_InstanceID]);
 	vec2 disp = vec2(instanceDistance * (mod(gl_InstanceID, chunkSize) + displacement[gl_InstanceID].x), instanceDistance * ((gl_InstanceID / chunkSize) + displacement[gl_InstanceID].y));
-	// gl_Position = model * translation * scale * (rotationY(0.25 * 3.1415926) * vec4(aPos.x + instanceDistance * (mod(gl_InstanceID, chunkSize) + displacement[gl_InstanceID].x), aPos.y, aPos.z + instanceDistance * ((gl_InstanceID / chunkSize) + displacement[gl_InstanceID].y), 1.0f));
-	gl_Position = model * translation * rotation * scale * (vec4(disp.x, 0.0, disp.y, 0.0) + (rotationYmat4(grassRotation[gl_InstanceID]) * rotationXmat4(curveAmount) * vec4(aPos.x, aPos.y * grassHeight[gl_InstanceID], aPos.z, 1.0f)));
+	gl_Position = model * translation * rotation * scale * (vec4(disp.x, 0.0, disp.y, 0.0) + (rotationYmat4(grassRotation[gl_InstanceID]) * rotationXmat4(curveAmount) * vec4(aPos.x, aPos.y * grassHeight[gl_InstanceID] * test_float, aPos.z, 1.0f)));
 	data_out.Normal = rotationYmat3(grassRotation[gl_InstanceID]) * rotationXmat3(curveAmount) * aNormal;
 	data_out.color = aColor;
 	data_out.texCoord = mat2(0.0, -1.0, 1.0, 0.0) * aTex;

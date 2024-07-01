@@ -2,6 +2,7 @@
 #define CHUNK_HANDLER_CLASS_H
 
 #include"Chunk.h"
+#include"ComputeShader.h"
 
 
 class ChunkHandler
@@ -20,6 +21,8 @@ public:
 	void BindCamera(Camera* camera);
 
 	void Render(Shader& shader, Shader& groundShader, Camera* camera, AbstractModel* LOD1, AbstractModel* LOD2);
+
+	void SetUpDataComputeShader(ComputeShader* computeShader);
 };
 
 #endif

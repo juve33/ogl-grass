@@ -26,6 +26,8 @@ private:
 public:
 	// Constructor that generates a buffer object and links it to vertices
 	Buffer(GLenum target, std::vector<T>& bufferData);
+	// Constructor that generates a buffer object without any data
+	Buffer(GLenum target, GLsizeiptr size, GLenum usage);
 	// Constructor that does nothing (to avoid the error message when defining a buffer in a class)
 	Buffer();
 
