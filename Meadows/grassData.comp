@@ -1,9 +1,7 @@
 #version 460 core
 
 #define RANDOM_SINLESS
-#define RANDOM_HIGHER_RANGE
-#define RANDOM_SCALE vec4(.1031, .1030, .0973, .1099)
-//include "../Libraries/lib/lygia/generative/random.glsl"
+#include "../Libraries/lib/lygia/generative/random.glsl"
 
 layout(local_size_x = 1, local_size_y = 1, local_size_z = 1) in;
 
@@ -14,15 +12,6 @@ layout(binding = 1) buffer grass_data1
 
 uniform float numberOfEntries;
 uniform float seed;
-
-
-
-float random(in float x) {
-    x = fract(x * 443.897);
-    x *= x + 33.33;
-    x *= x + x;
-    return fract(x);
-}
 
 
 

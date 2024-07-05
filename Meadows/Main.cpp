@@ -152,7 +152,7 @@ int main()
     unsigned int counter = 0;
 
     // Use this to disable VSync (not advised)
-    //glfwSwapInterval(0);
+    glfwSwapInterval(1);
 
 
 
