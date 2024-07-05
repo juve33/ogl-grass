@@ -116,18 +116,31 @@ int main()
 
     ChunkHandler grass((parentDir + "/Resources/ground").c_str(), 1000, 1000, DENSITY);
 
+    /*
+    grassData.bufferIndex = 1;
+    // grass rotation
+    grassData.AddSSBO(grass.GetNumberOfInstancesPerChunk() * 2 * sizeof(float), GL_STATIC_COPY);
+    // grass bending factor
+    grassData.AddSSBO(grass.GetNumberOfInstancesPerChunk() * sizeof(float), GL_STATIC_COPY);
+    // grass height factor
+    grassData.AddSSBO(grass.GetNumberOfInstancesPerChunk() * sizeof(float), GL_STATIC_COPY);*/
 
-    grassData.bufferIndex = 4;
-    grassData.AddSSBO(sizeof(float), GL_DYNAMIC_COPY);
+    grassData.bufferIndex = 1;
+    // grass height factor
+    grassData.AddSSBO(grass.GetNumberOfInstancesPerChunk() * 2 * sizeof(float), GL_STATIC_COPY);
 
     grassData.Activate();
+    glUniform1f(glGetUniformLocation(grassData.ID, "numberOfEntries"), grass.GetNumberOfInstancesPerChunk());
+    unsigned int seed = std::time(nullptr) % 1000;
+    glUniform1f(glGetUniformLocation(grassData.ID, "seed"), seed);
     grassData.Dispatch();
 
 
 
     std::cout << "Green, green grass, blue, blue sky" << "\n" << "You better throw a party on the day that I die\n\n";
     std::cout << "Time to load: " << std::to_string((unsigned int)((glfwGetTime() - prevTime) * 1000)) << "ms\n\n";
-    std::cout << "Using OpenGL " << glGetString(GL_VERSION);
+    std::cout << "Using OpenGL " << glGetString(GL_VERSION) << "\n";
+    std::cout << "Seed: " << seed << "\n";
 
 
 

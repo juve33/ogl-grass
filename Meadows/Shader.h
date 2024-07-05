@@ -2,6 +2,7 @@
 #define SHADER_CLASS_H
 
 #include"AbstractObject.h"
+#include <glsl-includes-expanded/Shadinclude.hpp>
 #include<string>
 #include<fstream>
 #include<sstream>

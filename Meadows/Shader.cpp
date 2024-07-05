@@ -27,7 +27,9 @@ Shader::Shader()
 void Shader::Attach(const char* file, GLenum shaderType)
 {
 	// Read Shader File and store the string
-	std::string code = get_file_contents(file);
+	//std::string code = get_file_contents(file);
+	Shadinclude shaderCompiler;
+	std::string code = shaderCompiler.load(std::string(file));
 
 	// Convert the shader source string into character array
 	const char* source = code.c_str();

@@ -68,6 +68,7 @@
     <None Include="grassData.comp" />
     <None Include="ground.frag" />
     <None Include="ground.vert" />
+    <None Include="math.glsl" />
     <None Include="skybox.frag" />
     <None Include="skybox.vert" />
   </ItemGroup>
