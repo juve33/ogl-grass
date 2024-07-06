@@ -125,9 +125,15 @@ int main()
     // grass height factor
     grassData.AddSSBO(grass.GetNumberOfInstancesPerChunk() * sizeof(float), GL_STATIC_COPY);*/
 
-    grassData.bufferIndex = 1;
-    // grass height factor
+    grassData.bufferIndex = 0;
+    // grass displacement
     grassData.AddSSBO(grass.GetNumberOfInstancesPerChunk() * 2 * sizeof(float), GL_STATIC_COPY);
+    // grass rotation
+    grassData.AddSSBO(grass.GetNumberOfInstancesPerChunk() * 2 * sizeof(float), GL_STATIC_COPY);
+    // grass curve value
+    grassData.AddSSBO(grass.GetNumberOfInstancesPerChunk() * sizeof(float), GL_STATIC_COPY);
+    // grass height factor
+    grassData.AddSSBO(grass.GetNumberOfInstancesPerChunk() * sizeof(float), GL_STATIC_COPY);
 
     grassData.Activate();
     glUniform1f(glGetUniformLocation(grassData.ID, "numberOfEntries"), grass.GetNumberOfInstancesPerChunk());

@@ -40,20 +40,20 @@ ChunkHandler::ChunkHandler(std::string groundTexDir, unsigned int x, unsigned in
         grassHeight.push_back(1.0f);*/
     }
 
-    Buffer<glm::vec2> SSBO_displacement(GL_SHADER_STORAGE_BUFFER, grassDisplacement);
+    //Buffer<glm::vec2> SSBO_displacement(GL_SHADER_STORAGE_BUFFER, grassDisplacement);
     //Buffer<glm::vec2> SSBO_rotation(GL_SHADER_STORAGE_BUFFER, grassRotation);
-    Buffer<float> SSBO_curve(GL_SHADER_STORAGE_BUFFER, grassCurveValue);
-    Buffer<float> SSBO_height(GL_SHADER_STORAGE_BUFFER, grassHeight);
+    //Buffer<float> SSBO_curve(GL_SHADER_STORAGE_BUFFER, grassCurveValue);
+    //Buffer<float> SSBO_height(GL_SHADER_STORAGE_BUFFER, grassHeight);
 
-    SSBO_displacement.SetBinding(0);
+    //SSBO_displacement.SetBinding(0);
     //SSBO_rotation.SetBinding(1);
-    SSBO_curve.SetBinding(2);
-    SSBO_height.SetBinding(3);
+    //SSBO_curve.SetBinding(2);
+    //SSBO_height.SetBinding(3);
 
-    SSBO_displacement.Unbind();
+    //SSBO_displacement.Unbind();
     //SSBO_rotation.Unbind();
-    SSBO_curve.Unbind();
-    SSBO_height.Unbind();
+    //SSBO_curve.Unbind();
+    //SSBO_height.Unbind();
 }
 
 void ChunkHandler::Render(Shader& shader, Shader& groundShader, Camera* camera, AbstractModel* LOD1, AbstractModel* LOD2)
