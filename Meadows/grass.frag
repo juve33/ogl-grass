@@ -33,7 +33,7 @@ vec4 direcLight()
 
 	// diffuse lighting
 	vec3 normal = normalize(Normal);
-	float diffuse = max(dot(normal, vec3(0.0, -1.0, 0.0)), 0.0f);
+	float diffuse = pow(max(dot(normal, vec3(0.0, -1.0, 0.0)), 0.0f), 2.0);
 
 	// specular lighting
 	float specularLight = 0.25f;
@@ -42,9 +42,9 @@ vec4 direcLight()
 	float specAmount = pow(max(dot(viewDirection, reflectionDirection), 0.0f), 16);
 	float specular = specAmount * specularLight;
 
-	vec4 color = vec4(0.0f, 0.5f, 0.0f, 1.0f);
+	vec4 color = vec4(0.0f, 0.75f, 0.0f, 1.0f);
 
-	return (color * (diffuse + ambient) + specular) * lightColor;
+	return (color * (0.75 * diffuse + ambient) + specular) * lightColor;
 }
 
 

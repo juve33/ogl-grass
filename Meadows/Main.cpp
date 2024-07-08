@@ -137,7 +137,7 @@ int main()
 
     grassData.Activate();
     glUniform1f(glGetUniformLocation(grassData.ID, "numberOfEntries"), grass.GetNumberOfInstancesPerChunk());
-    unsigned int seed = std::time(nullptr) % 1000;
+    unsigned int seed = std::time(nullptr) % 750 + 250;
     glUniform1f(glGetUniformLocation(grassData.ID, "seed"), seed);
     grassData.Dispatch();
 
@@ -157,7 +157,7 @@ int main()
     // Keeps track of the amount of frames in timeDiff
     unsigned int counter = 0;
 
-    // Use this to disable VSync (not advised)
+    // Set this to 0 to disable VSync (you might became very, very fast)
     glfwSwapInterval(1);
 
 
