@@ -116,15 +116,6 @@ int main()
 
     ChunkHandler grass((parentDir + "/Resources/ground").c_str(), 1000, 1000, DENSITY);
 
-    /*
-    grassData.bufferIndex = 1;
-    // grass rotation
-    grassData.AddSSBO(grass.GetNumberOfInstancesPerChunk() * 2 * sizeof(float), GL_STATIC_COPY);
-    // grass bending factor
-    grassData.AddSSBO(grass.GetNumberOfInstancesPerChunk() * sizeof(float), GL_STATIC_COPY);
-    // grass height factor
-    grassData.AddSSBO(grass.GetNumberOfInstancesPerChunk() * sizeof(float), GL_STATIC_COPY);*/
-
     grassData.bufferIndex = 0;
     // grass displacement
     grassData.AddSSBO(grass.GetNumberOfInstancesPerChunk() * 2 * sizeof(float), GL_STATIC_COPY);
@@ -137,7 +128,8 @@ int main()
 
     grassData.Activate();
     glUniform1f(glGetUniformLocation(grassData.ID, "numberOfEntries"), grass.GetNumberOfInstancesPerChunk());
-    unsigned int seed = std::time(nullptr) % 750 + 250;
+    //unsigned int seed = std::time(nullptr) % 750 + 250;
+    unsigned int seed = 941;
     glUniform1f(glGetUniformLocation(grassData.ID, "seed"), seed);
     grassData.Dispatch();
 
