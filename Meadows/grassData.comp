@@ -1,0 +1,52 @@
+#version 460 core
+
+#define RANDOM_SINLESS
+#include "../Libraries/lib/lygia/generative/random.glsl"
+
+layout(local_size_x = 1, local_size_y = 1, local_size_z = 1) in;
+
+layout(binding = 0) buffer grass_data0
+{
+    vec2 displacement[];
+};
+layout(binding = 1) buffer grass_data1
+{
+    vec2 grassRotation[];
+};
+layout(binding = 2) buffer grass_data2
+{
+    float grassBending[];
+};
+layout(binding = 3) buffer grass_data3
+{
+    float grassHeight[];
+};
+
+uniform float numberOfEntries;
+uniform float seed;
+
+
+
+void main()
+{
+	displacement[0] = random2(seed);
+
+	float rotation = (random(seed) * 360) * 3.14159 / 180;
+	grassRotation[0] = vec2(sin(rotation), cos(rotation));
+
+	grassBending[0] = random(seed) / 1.5;
+
+	grassHeight[0] = random(seed) / 2.0 + 0.75;
+
+	for(int i=1;i<numberOfEntries;i++)
+	{
+		displacement[i] = random2(seed * i);
+
+		rotation = (random(seed / i) * 360) * 3.14159 / 180;
+		grassRotation[i] = vec2(sin(rotation), cos(rotation));
+
+		grassBending[i] = random(seed * (0.5 + grassBending[i - 1])) / 1.5;
+
+		grassHeight[i] = random(seed * (0.5 + grassHeight[i - 1])) / 2.0 + 0.75;
+	}
+}

@@ -1,0 +1,6 @@
+[submodule "Libraries/lib/lygia"]
+	path = Libraries/lib/lygia
+	url = https://github.com/patriciogonzalezvivo/lygia.git
+[submodule "Libraries/include/glsl-includes-expanded"]
+	path = Libraries/include/glsl-includes-expanded
+	url = https://github.com/juve33/glsl-includes-expanded
